@@ -351,3 +351,23 @@ describe('determinism', () => {
     expect(a.tick).toBe(1500);
   });
 });
+
+describe('client prediction parity', () => {
+  it('replaying inputs with stepFlight matches what the server world does to the same plane', () => {
+    const w = mk(1);
+    const p = plane(w, 0);
+    p.invuln = 99; // keep crashes and stray fire out of the comparison
+    const params = playerStats('kestrel');
+    const body = { x: p.x, y: p.y, heading: p.heading, speed: p.speed };
+    for (let t = 0; t < 600; t++) {
+      const input = inp({ turn: 0.2 * Math.sin(t / 30), thrust: t % 50 < 40 });
+      w.step([input]);
+      stepFlight(body, input, params, 1 / 60);
+    }
+    expect(p.alive).toBe(true); // a crash would end the comparison early
+    expect(p.x).toBeCloseTo(body.x, 6);
+    expect(p.y).toBeCloseTo(body.y, 6);
+    expect(p.heading).toBeCloseTo(body.heading, 6);
+    expect(p.speed).toBeCloseTo(body.speed, 6);
+  });
+});

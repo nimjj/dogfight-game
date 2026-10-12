@@ -1,4 +1,4 @@
-export const WORLD_W = 4000;
+export const WORLD_W = 3200;
 export const WORLD_H = 2000;
 export const GROUND_Y = 1880;
 
@@ -12,6 +12,7 @@ export const TEAM_ENEMIES = 1;
 
 export const MAX_PLAYERS = 2;
 export const COOP_SCALE = 1.6;
+export const COOP_LIVES = 5;
 
 /** HUD shows speed in "knots"; the sim uses px/s. */
 export const SPEED_DISPLAY_MULT = 1.6;

@@ -12,7 +12,8 @@
     "start": "node src/server/index.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "smoke": "node scripts/smoke-coop.ts"
+    "smoke": "node scripts/smoke-coop.ts",
+    "bot-host": "node scripts/bot-host.ts"
   },
   "dependencies": {
     "phaser": "3.90.0",

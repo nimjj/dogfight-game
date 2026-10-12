@@ -143,6 +143,17 @@ export class World {
     this.planes = this.planes.filter((p) => p.alive);
   }
 
+  /** A pilot came back within the rejoin window: they get a fresh plane without costing a life. */
+  reconnectPlayer(slot: number): boolean {
+    const pl = this.players[slot];
+    if (!pl || pl.connected || this.gameOver) return false;
+    pl.connected = true;
+    pl.out = false;
+    spawnPlayerPlane(this, slot);
+    this.emit({ t: 'respawn', slot });
+    return true;
+  }
+
   /** Advance one fixed tick. `inputs` is indexed by player slot. */
   step(inputs: ReadonlyArray<InputState | undefined>): void {
     if (this.gameOver) return;
