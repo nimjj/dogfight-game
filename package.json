@@ -1,0 +1,29 @@
+{
+  "name": "dogfight-coop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dogfight Co-op: Phaser dogfight shooter with online 2-player co-op (no friendly fire)",
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c yellow,cyan \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:client": "vite --host",
+    "dev:server": "node --watch src/server/index.ts",
+    "build": "tsc --noEmit && vite build",
+    "start": "node src/server/index.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node scripts/smoke-coop.ts"
+  },
+  "dependencies": {
+    "phaser": "3.90.0",
+    "ws": "8.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.0.0",
+    "@types/ws": "8.18.1",
+    "concurrently": "10.0.6",
+    "typescript": "5.9.3",
+    "vite": "8.3.4",
+    "vitest": "5.0.4"
+  }
+}
